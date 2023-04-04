@@ -17,7 +17,7 @@ import java.util.Objects;
 public class FilmController {
     private static final int MAX_LENGTH = 200;
     private static final int MIN_DURATION = 0;
-    private final static LocalDate RELEASE_DATE = LocalDate.of(1895, 12, 28);
+    private static final LocalDate RELEASE_DATE = LocalDate.of(1895, 12, 28);
 
     private long id;
     private final HashMap<Long, Film> films = new HashMap<>();

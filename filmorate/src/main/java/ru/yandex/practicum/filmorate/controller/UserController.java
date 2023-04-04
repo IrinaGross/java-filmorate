@@ -15,8 +15,8 @@ import java.util.Objects;
 @Slf4j
 @RestController
 public class UserController {
-    private final static String AT = "@";
-    private final static LocalDate NOW_DATE = LocalDate.now();
+    private static final String AT = "@";
+    private static final LocalDate NOW_DATE = LocalDate.now();
 
     private long id;
     private final HashMap<Long, User> users = new HashMap<>();
@@ -41,7 +41,7 @@ public class UserController {
     public User put(@RequestBody User user) {
         validate(user, true);
         if (!users.containsKey(user.getId())) {
-            throw  new ValidationException("Такого пользователя нет");
+            throw new ValidationException("Такого пользователя нет");
         }
         users.put(user.getId(), user);
         log.trace("Пользователь сохранен");
