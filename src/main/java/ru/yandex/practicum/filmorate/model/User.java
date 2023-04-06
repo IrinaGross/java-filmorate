@@ -18,6 +18,8 @@ public class User {
     public String getName() {
         if (Objects.isNull(name) || name.isEmpty()) {
             return login;
-        } else return name;
+        } else {
+            return name;
+        }
     }
 }
