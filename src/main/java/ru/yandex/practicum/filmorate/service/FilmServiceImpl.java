@@ -42,8 +42,10 @@ class FilmServiceImpl implements FilmService {
 
     @Override
     public List<Film> getMostPopularFilms(Integer limit) {
-        return filmLikesStorage.getMostPopularFilms(limit == null ? DEFAULT_POPULAR_LIMIT : limit)
-                .map(filmStorage::getFilm)
+        return filmStorage.getAllFilms()
+                .stream()
+                .sorted(filmLikesStorage.ratingComparator())
+                .limit(limit == null ? DEFAULT_POPULAR_LIMIT : limit)
                 .collect(Collectors.toList());
     }
 

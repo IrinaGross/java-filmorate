@@ -3,9 +3,9 @@ package ru.yandex.practicum.filmorate.storage;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import ru.yandex.practicum.filmorate.model.Film;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
@@ -13,30 +13,40 @@ class InMemoryFilmLikesStorage implements FilmLikesStorage {
     private final Map<Long, Set<Long>> storage = new HashMap<>();
 
     @Override
-    public Stream<Long> getMostPopularFilms(Integer count) {
-        return storage.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.comparingInt(Set::size)))
-                .filter(it -> !it.getValue().isEmpty())
-                .limit(count)
-                .map(Map.Entry::getKey);
-    }
-
-    @Override
     public void unlikeFilm(Long filmId, Long userId) {
-        Set<Long> collection = getOrDefault(filmId);
+        Set<Long> collection = getOrDefault(storage, filmId);
         collection.remove(userId);
         storage.put(filmId, collection);
     }
 
     @Override
     public void likeFilm(Long filmId, Long userId) {
-        Set<Long> collection = getOrDefault(filmId);
+        Set<Long> collection = getOrDefault(storage, filmId);
         collection.add(userId);
         storage.put(filmId, collection);
     }
 
-    private Set<Long> getOrDefault(Long filmId) {
+    @Override
+    public Comparator<? super Film> ratingComparator() {
+        return new FilmComparator(storage);
+    }
+
+    static class FilmComparator implements Comparator<Film> {
+        private final Map<Long, Set<Long>> snapshot;
+
+        public FilmComparator(Map<Long, Set<Long>> map) {
+            snapshot = new HashMap<>(map);
+        }
+
+        @Override
+        public int compare(Film o1, Film o2) {
+            int o1LikesCount = getOrDefault(snapshot, o1.getId()).size();
+            int o2LikesCount = getOrDefault(snapshot, o2.getId()).size();
+            return Integer.compare(o2LikesCount, o1LikesCount);
+        }
+    }
+
+    private static Set<Long> getOrDefault(Map<Long, Set<Long>> storage, Long filmId) {
         return storage.getOrDefault(filmId, new HashSet<>());
     }
 }
