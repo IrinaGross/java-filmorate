@@ -3,7 +3,6 @@ package ru.yandex.practicum.filmorate.controller;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
@@ -16,7 +15,7 @@ import static ru.yandex.practicum.filmorate.controller.validation.FilmorateValid
 @SuppressWarnings("unused")
 @Slf4j
 @RestController
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class UserController {
     private final UserService service;
 

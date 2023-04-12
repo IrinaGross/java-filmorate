@@ -1,7 +1,5 @@
 package ru.yandex.practicum.filmorate.storage;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
@@ -12,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 class InMemoryFilmStorage implements FilmStorage {
     private long id;
     private final Map<Long, Film> films = new HashMap<>();

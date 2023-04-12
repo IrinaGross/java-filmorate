@@ -1,14 +1,15 @@
 package ru.yandex.practicum.filmorate.storage;
 
 import org.springframework.lang.NonNull;
-import ru.yandex.practicum.filmorate.model.Film;
 
-import java.util.Comparator;
+import java.util.Map;
+import java.util.Set;
 
 public interface FilmLikesStorage {
     void unlikeFilm(@NonNull Long filmId, @NonNull Long userId);
 
     void likeFilm(@NonNull Long filmId, @NonNull Long userId);
 
-    Comparator<? super Film> ratingComparator();
+    @NonNull
+    Map<Long, Set<Long>> getRating();
 }
