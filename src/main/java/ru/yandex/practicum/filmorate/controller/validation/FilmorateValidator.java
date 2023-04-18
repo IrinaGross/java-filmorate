@@ -1,13 +1,11 @@
 package ru.yandex.practicum.filmorate.controller.validation;
 
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
 
 import java.time.LocalDate;
-import java.util.Map;
 import java.util.Objects;
 
 @Slf4j
@@ -29,22 +27,6 @@ public class FilmorateValidator {
                 || user.getBirthday().isAfter(NOW_DATE)) {
             log.warn("Пользователь не сохранен из-за некорректных данных");
             throw new ValidationException("Некорректные данные пользователя");
-        }
-    }
-
-    public static void checkExist(Map<Long, User> storage, User user) {
-        if (!storage.containsKey(user.getId())) {
-            val message = "Такого пользователя нет";
-            log.warn(message);
-            throw new ValidationException(message);
-        }
-    }
-
-    public static void checkExist(Map<Long, Film> storage, Film film) {
-        if (!storage.containsKey(film.getId())) {
-            val message = "Такого фильма нет";
-            log.warn(message);
-            throw new ValidationException(message);
         }
     }
 }
