@@ -1,6 +1,7 @@
 package ru.yandex.practicum.filmorate.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
@@ -20,8 +21,11 @@ import static ru.yandex.practicum.filmorate.utils.MapUtils.getOrEmptySet;
 @RequiredArgsConstructor
 class FilmServiceImpl implements FilmService {
     public static final int DEFAULT_POPULAR_LIMIT = 10;
+    @Qualifier("db")
     private final FilmStorage filmStorage;
+    @Qualifier("db")
     private final UserStorage userStorage;
+    @Qualifier("db")
     private final FilmLikesStorage filmLikesStorage;
 
     @Override

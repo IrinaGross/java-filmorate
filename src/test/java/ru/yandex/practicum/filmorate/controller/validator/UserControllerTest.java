@@ -3,6 +3,7 @@ package ru.yandex.practicum.filmorate.controller.validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
@@ -16,6 +17,7 @@ import java.util.Set;
 import static ru.yandex.practicum.filmorate.controller.validation.FilmorateValidator.validate;
 
 @SpringBootTest
+@AutoConfigureTestDatabase
 class UserControllerTest {
     private static Validator validator;
 
