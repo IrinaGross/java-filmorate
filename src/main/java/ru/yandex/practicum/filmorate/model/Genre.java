@@ -2,7 +2,7 @@ package ru.yandex.practicum.filmorate.model;
 
 import lombok.*;
 import lombok.extern.jackson.Jacksonized;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 @Data
@@ -11,7 +11,7 @@ import org.springframework.lang.Nullable;
 @Jacksonized
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Genre {
-    @NotNull
+    @NonNull
     private final Long id;
     @Nullable
     private String name;
