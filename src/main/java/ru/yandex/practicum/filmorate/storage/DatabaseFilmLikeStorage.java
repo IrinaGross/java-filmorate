@@ -23,7 +23,7 @@ class DatabaseFilmLikeStorage implements FilmLikesStorage {
 
     @Override
     public void likeFilm(@NonNull Long filmId, @NonNull Long userId) {
-        String query = "INSERT INTO \"filmorate\".\"user_film\" (\"user_id\", \"film_id\") " +
+        String query = "MERGE INTO \"filmorate\".\"user_film\" (\"user_id\", \"film_id\") " +
                 "VALUES(?, ?);\n";
         jdbcTemplate.update(con -> {
             PreparedStatement statement = con.prepareStatement(query);

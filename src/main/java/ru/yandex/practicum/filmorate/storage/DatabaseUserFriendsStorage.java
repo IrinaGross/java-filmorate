@@ -19,7 +19,7 @@ class DatabaseUserFriendsStorage implements UserFriendsStorage {
     @Override
     public void addFriend(@NonNull Long userId, @NonNull Long friendId) {
         FriendStatus friendStatus = getFriendStatus(userId, friendId);
-        String query = "INSERT INTO \"filmorate\".\"friends\" (\"user_id\", \"followed_user_id\", \"friend_status\") " +
+        String query = "MERGE INTO \"filmorate\".\"friends\" (\"user_id\", \"followed_user_id\", \"friend_status\") " +
                 "VALUES(?, ?, ?)";
         jdbcTemplate.update(query, userId, friendId, friendStatus.name());
     }

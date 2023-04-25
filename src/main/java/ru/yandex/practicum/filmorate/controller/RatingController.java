@@ -24,7 +24,7 @@ public class RatingController {
     }
 
     @GetMapping("/mpa/{id}")
-    public MpaRating getGenre(@PathVariable("id") @NonNull Long ratingId) {
+    public MpaRating getRating(@PathVariable("id") @NonNull Long ratingId) {
         return service.getById(ratingId);
     }
 }
