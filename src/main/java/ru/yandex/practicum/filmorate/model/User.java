@@ -1,7 +1,7 @@
 package ru.yandex.practicum.filmorate.model;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.Email;
@@ -11,7 +11,10 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Data
+@Builder(toBuilder = true)
 @RequiredArgsConstructor
+@Jacksonized
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class User {
     private Long id;
     @NonNull
